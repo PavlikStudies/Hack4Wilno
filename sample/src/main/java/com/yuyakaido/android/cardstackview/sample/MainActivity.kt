@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
     }
 
     override fun onCardSwiped(direction: Direction) {
+
         Log.d("CardStackView", "onCardSwiped: p = ${manager.topPosition}, d = $direction")
         if (manager.topPosition == adapter.itemCount - 3) {
             paginate()
@@ -147,6 +148,9 @@ class MainActivity : AppCompatActivity(), CardStackListener {
                     .build()
             manager.setSwipeAnimationSetting(setting)
             cardStackView.swipe()
+
+
+
         }
     }
 

@@ -9,10 +9,10 @@
     <ImageButton
         android:id="@+id/gediminas"
         style="@style/Widget.AppCompat.ImageButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_width="320dp"
+        android:layout_height="205dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginLeft="72dp"
         android:scaleType="centerInside"
         android:src="@drawable/gediminas_tour"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,41 +21,40 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.438"
+        app:layout_constraintVertical_bias="0.119"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/bar_button"
         style="@style/Widget.AppCompat.ImageButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="320dp"
+        android:layout_height="182dp"
         android:rotationY="180"
         android:scaleType="centerInside"
         android:src="@drawable/night_life"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintHorizontal_bias="0.69"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.438"
+        app:layout_constraintVertical_bias="0.535"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/cultured_button"
         style="@style/Widget.AppCompat.ImageButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="302dp"
+        android:layout_height="176dp"
         android:rotationY="180"
         android:scaleType="centerCrop"
         android:src="@drawable/culture"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.948"
+        app:layout_constraintHorizontal_bias="0.699"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.438"
+        app:layout_constraintVertical_bias="0.932"
         tools:ignore="SpeakableTextPresentCheck" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
