@@ -5,6 +5,7 @@ data class Spot(
         val name: String,
         val address: String,
         val url: String,
+        val longlat: String? = "",
         val types: List<SpotType>? = emptyList()
 ) {
     companion object {

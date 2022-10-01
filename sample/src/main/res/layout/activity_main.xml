@@ -77,6 +77,19 @@
                     app:fabSize="auto"
                     app:rippleColor="#226FE2B3" />
 
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/tick_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/like_button"
+                    android:layout_toRightOf="@+id/like_button"
+                    android:contentDescription="@string/add_spot_to_first"
+                    android:src="@drawable/like_green_24dp"
+                    app:backgroundTint="@android:color/white"
+                    app:fabSize="auto"
+                    app:rippleColor="#226FE2B3" />
+
             </RelativeLayout>
 
             <com.yuyakaido.android.cardstackview.CardStackView

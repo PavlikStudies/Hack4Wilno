@@ -1,6 +1,8 @@
 package com.yuyakaido.android.cardstackview.sample
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -8,6 +10,7 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -151,6 +154,21 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
 
 
+        }
+
+        val tick = findViewById<View>(R.id.tick_button)
+        tick.setOnClickListener {
+            //"https://www.google.com/maps/dir/?api=1&origin=18.519513,73.868315&destination=18.518496,73.879259&waypoints=18.520561,73.872435|18.519254,73.876614|18.52152,73.877327|18.52019,73.879935"
+            val gmmIntentUri = Uri.parse("geo:54.71107398301154, 25.26311639349107")
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+
+
+            try {
+                startActivity(mapIntent)
+            } catch (ex: ActivityNotFoundException) {
+                Toast.makeText(this, R.string.application_not_found, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
