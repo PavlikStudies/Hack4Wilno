@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawers()
         } else {
-            val intent = Intent(this, DropPage::class.java)
+            val intent = Intent(this, FilterPage::class.java)
             startActivity(intent)
         }
     }
