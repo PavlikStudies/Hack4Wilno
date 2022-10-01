@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
 import com.google.android.material.navigation.NavigationView
 import com.yuyakaido.android.cardstackview.*
-import java.util.*
 
 class MainActivity : AppCompatActivity(), CardStackListener {
 
@@ -24,7 +23,8 @@ class MainActivity : AppCompatActivity(), CardStackListener {
     private val drawerLayout by lazy { findViewById<DrawerLayout>(R.id.drawer_layout) }
     private val cardStackView by lazy { findViewById<CardStackView>(R.id.card_stack_view) }
     private val manager by lazy { CardStackLayoutManager(this, this) }
-    private val adapter by lazy { CardStackAdapter(ListSpots().createSpots()) }
+    private val listSpots by lazy { ListSpots() }
+    private val adapter by lazy { CardStackAdapter(listSpots.createSpots()) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         val rewind = findViewById<View>(R.id.rewind_button)
         rewind.setOnClickListener {
             val setting = RewindAnimationSetting.Builder()
-                    .setDirection(Direction.Bottom)
+                    .setDirection(Direction.Top)
                     .setDuration(Duration.Normal.duration)
                     .setInterpolator(DecelerateInterpolator())
                     .build()
@@ -160,7 +160,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
     private fun paginate() {
         val old = adapter.getSpots()
-        val new = old.plus(createSpots())
+        val new = old.plus(listSpots.createSpots())
         val callback = SpotDiffCallback(old, new)
         val result = DiffUtil.calculateDiff(callback)
         adapter.setSpots(new)
@@ -169,7 +169,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
     private fun reload() {
         val old = adapter.getSpots()
-        val new = createSpots()
+        val new = listSpots.createSpots()
         val callback = SpotDiffCallback(old, new)
         val result = DiffUtil.calculateDiff(callback)
         adapter.setSpots(new)
@@ -267,24 +267,8 @@ class MainActivity : AppCompatActivity(), CardStackListener {
     private fun createSpot(): Spot {
         return Spot(
                 name = "Yasaka Shrine",
-                city = "Kyoto",
+                address = "Kyoto",
                 url = "https://source.unsplash.com/Xq1ntWruZQI/600x800"
         )
     }
-
-    private fun createSpots(): List<Spot> {
-        val spots = ArrayList<Spot>()
-        spots.add(Spot(name = "Yasaka Shrine", city = "Kyoto", url = "https://source.unsplash.com/Xq1ntWruZQI/600x800"))
-        spots.add(Spot(name = "Fushimi Inari Shrine", city = "Kyoto", url = "https://source.unsplash.com/NYyCqdBOKwc/600x800"))
-        spots.add(Spot(name = "Bamboo Forest", city = "Kyoto", url = "https://source.unsplash.com/buF62ewDLcQ/600x800"))
-        spots.add(Spot(name = "Brooklyn Bridge", city = "New York", url = "https://source.unsplash.com/THozNzxEP3g/600x800"))
-        spots.add(Spot(name = "Empire State Building", city = "New York", url = "https://source.unsplash.com/USrZRcRS2Lw/600x800"))
-        spots.add(Spot(name = "The statue of Liberty", city = "New York", url = "https://source.unsplash.com/PeFk7fzxTdk/600x800"))
-        spots.add(Spot(name = "Louvre Museum", city = "Paris", url = "https://source.unsplash.com/LrMWHKqilUw/600x800"))
-        spots.add(Spot(name = "Eiffel Tower", city = "Paris", url = "https://source.unsplash.com/HN-5Z6AmxrM/600x800"))
-        spots.add(Spot(name = "Big Ben", city = "London", url = "https://source.unsplash.com/CdVAUADdqEc/600x800"))
-        spots.add(Spot(name = "Great Wall of China", city = "China", url = "https://source.unsplash.com/AWh9C-QjhE4/600x800"))
-        return spots
-    }
-
 }
