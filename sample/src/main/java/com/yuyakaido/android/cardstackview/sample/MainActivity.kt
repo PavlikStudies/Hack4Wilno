@@ -159,8 +159,24 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         val tick = findViewById<View>(R.id.tick_button)
         tick.setOnClickListener {
             //"https://www.google.com/maps/dir/?api=1&origin=18.519513,73.868315&destination=18.518496,73.879259&waypoints=18.520561,73.872435|18.519254,73.876614|18.52152,73.877327|18.52019,73.879935"
+            var uri = "https://www.google.com/maps/dir/?api=1&origin="
+
+
+            if (likedSpots.size > 0) {
+                uri += likedSpots[0].longlat
+            }
+            if (likedSpots.size > 1) {
+                uri += "&destination=" + likedSpots[1].longlat
+            }
+            if (likedSpots.size > 2) {
+                uri += "&waypoints=" + likedSpots[2].longlat
+                for (likedSpot in likedSpots.subList(3, likedSpots.size)) {
+                    uri += "|" + likedSpot.longlat
+                }
+            }
+
             val gmmIntentUri = Uri.parse("geo:54.71107398301154, 25.26311639349107")
-            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            val mapIntent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
             mapIntent.setPackage("com.google.android.apps.maps")
 
 
