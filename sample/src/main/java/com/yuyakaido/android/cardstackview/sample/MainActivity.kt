@@ -1,5 +1,6 @@
 package com.yuyakaido.android.cardstackview.sample
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         setupNavigation()
         setupCardStackView()
         setupButton()
+
     }
 
     override fun onBackPressed() {
