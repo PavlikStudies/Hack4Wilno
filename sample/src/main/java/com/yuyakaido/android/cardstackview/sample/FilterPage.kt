@@ -10,10 +10,29 @@ class FilterPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.filter_page)
-        val transferbutton = findViewById<View>(R.id.cultured_button)
+        val gediminas = findViewById<View>(R.id.gediminas)
 
-        transferbutton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java);
+        gediminas.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("filtras", SpotType.SIGHTSEEING)
+            startActivity(intent)
+            finish()
+        }
+
+        val barButton = findViewById<View>(R.id.bar_button)
+
+        barButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("filtras", SpotType.NIGHTLIFE)
+            startActivity(intent)
+            finish()
+        }
+
+        val transferButton = findViewById<View>(R.id.cultured_button)
+
+        transferButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("filtras", SpotType.CULTURAL)
             startActivity(intent)
             finish()
         }

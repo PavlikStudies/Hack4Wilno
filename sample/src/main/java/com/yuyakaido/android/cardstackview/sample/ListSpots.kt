@@ -4,7 +4,7 @@ import kotlin.collections.ArrayList
 
 class ListSpots {
 
-    public fun createSpots(): List<Spot> {
+    fun createSpots(): List<Spot> {
         val spots = ArrayList<Spot>()
         spots.add(Spot(name = "St. Anne's Church (Vilniaus Šv. Onos bažnyčia)", address = "Maironio g. 8", types = listOf(SpotType.CULTURAL),
                 url = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/St._Anne%27s_Church_Exterior_3%2C_Vilnius%2C_Lithuania_-_Diliff.jpg/375px-St._Anne%27s_Church_Exterior_3%2C_Vilnius%2C_Lithuania_-_Diliff.jpg"))
@@ -28,5 +28,9 @@ class ListSpots {
         spots.add(Spot(name = "Televizijos bokštas", address = "Sausio 13-osios g. 10", types = listOf(SpotType.SIGHTSEEING),
                 url = "https://sa.lt/wp-content/uploads/2021/08/vilniaus-tv-bokstas.jpg"))
         return spots
+    }
+
+    fun filterByEnum(spots: List<Spot>, spotType: SpotType): List<Spot> {
+        return spots.filter { spot -> spot.types!!.contains(spotType) }
     }
 }

@@ -20,15 +20,21 @@ import com.yuyakaido.android.cardstackview.*
 
 class MainActivity : AppCompatActivity(), CardStackListener {
 
-
     private val drawerLayout by lazy { findViewById<DrawerLayout>(R.id.drawer_layout) }
     private val cardStackView by lazy { findViewById<CardStackView>(R.id.card_stack_view) }
     private val manager by lazy { CardStackLayoutManager(this, this) }
     private val listSpots by lazy { ListSpots() }
-    private val adapter by lazy { CardStackAdapter(listSpots.createSpots()) }
+    private val adapter by lazy { CardStackAdapter() }
+    private lateinit var filtras: SpotType
+    private val likedSpots: MutableList<Spot> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val filtrasExtra = intent.getSerializableExtra("filtras")
+        if (filtrasExtra != null) {
+            filtras = filtrasExtra as SpotType
+            adapter.setSpots(listSpots.filterByEnum(listSpots.createSpots(), filtras))
+        }
         setContentView(R.layout.activity_main)
         setupNavigation()
         setupCardStackView()
@@ -40,7 +46,8 @@ class MainActivity : AppCompatActivity(), CardStackListener {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawers()
         } else {
-            super.onBackPressed()
+            val intent = Intent(this, DropPage::class.java)
+            startActivity(intent)
         }
     }
 
@@ -50,8 +57,11 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
     override fun onCardSwiped(direction: Direction) {
         Log.d("CardStackView", "onCardSwiped: p = ${manager.topPosition}, d = $direction")
-        if (manager.topPosition == adapter.itemCount - 5) {
+        if (manager.topPosition == adapter.itemCount - 3) {
             paginate()
+        }
+        if (direction == Direction.Right) {
+            likedSpots.add(adapter.getSpots()[manager.topPosition - 1])
         }
     }
 
@@ -125,6 +135,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
                     .build()
             manager.setRewindAnimationSetting(setting)
             cardStackView.rewind()
+            likedSpots.forEach { spot -> Log.d("LikedSpots", spot.name) }
         }
 
         val like = findViewById<View>(R.id.like_button)
@@ -140,7 +151,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
     }
 
     private fun initialize() {
-        manager.setStackFrom(StackFrom.None)
+        manager.setStackFrom(StackFrom.Top)
         manager.setVisibleCount(3)
         manager.setTranslationInterval(8.0f)
         manager.setScaleInterval(0.95f)
@@ -162,7 +173,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
     private fun paginate() {
         val old = adapter.getSpots()
-        val new = old.plus(listSpots.createSpots())
+        val new = old.plus(listSpots.filterByEnum(listSpots.createSpots(), filtras))
         val callback = SpotDiffCallback(old, new)
         val result = DiffUtil.calculateDiff(callback)
         adapter.setSpots(new)
@@ -171,7 +182,7 @@ class MainActivity : AppCompatActivity(), CardStackListener {
 
     private fun reload() {
         val old = adapter.getSpots()
-        val new = listSpots.createSpots()
+        val new = listSpots.filterByEnum(listSpots.createSpots(), filtras)
         val callback = SpotDiffCallback(old, new)
         val result = DiffUtil.calculateDiff(callback)
         adapter.setSpots(new)
