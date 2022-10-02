@@ -2,8 +2,12 @@ package com.yuyakaido.android.cardstackview.sample
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.StyleSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -64,8 +68,18 @@ class MainActivity : AppCompatActivity(), CardStackListener {
             dialog.setCancelable(false)
             dialog.setContentView(view)
             dialog.show()
+
             val nameView = view.findViewById<TextView>(R.id.idTVCourseName)
             nameView.text = adapter.getSpots()[manager.topPosition].name
+
+            val tagView = view.findViewById<TextView>(R.id.idTVCourseTracks)
+            var tagString = "Tags: "
+
+            adapter.getSpots()[manager.topPosition].tags?.forEach { tag -> tagString += tag.name + " " }
+            val spannable = SpannableStringBuilder(tagString)
+            spannable.setSpan(StyleSpan(Typeface.BOLD), 0, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            tagView.text = spannable
+
             val imageView = view.findViewById<ImageView>(R.id.idIVCourse)
             Glide.with(imageView)
                     .load(adapter.getSpots()[manager.topPosition].url)
