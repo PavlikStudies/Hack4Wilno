@@ -33,7 +33,6 @@
     <color name="Red">#FF0000</color>
     <color name="OldLace">#FDF5E6</color>
     <color name="LightGoldenrodYellow">#FAFAD2</color>
-    <color name="Linen">#FAF0E6</color>
     <color name="AntiqueWhite">#FAEBD7</color>
     <color name="Salmon">#FA8072</color>
     <color name="GhostWhite">#F8F8FF</color>
@@ -140,4 +139,5 @@
     <color name="DarkBlue">#00008B</color>
     <color name="Navy">#000080</color>
     <color name="Black">#000000</color>
+    <color name="Linen">#E3E4E0</color>
 </resources>
