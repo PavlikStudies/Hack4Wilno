@@ -6,7 +6,8 @@ data class Spot(
         val address: String,
         val url: String,
         val longlat: String? = "",
-        val types: List<SpotType>? = emptyList()
+        val types: List<SpotType>? = emptyList(),
+        val tags: List<SpotKeywords>? = emptyList()
 ) {
     companion object {
         private var counter = 0L

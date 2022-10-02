@@ -11,6 +11,7 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -22,6 +23,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
@@ -55,12 +57,19 @@ class MainActivity : AppCompatActivity(), CardStackListener {
             val dialog = BottomSheetDialog(this)
             val view = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
             val btnClose = view.findViewById<Button>(R.id.idBtnDismiss)
+
             btnClose.setOnClickListener {
                 dialog.dismiss()
             }
             dialog.setCancelable(false)
             dialog.setContentView(view)
             dialog.show()
+            val nameView = view.findViewById<TextView>(R.id.idTVCourseName)
+            nameView.text = adapter.getSpots()[manager.topPosition].name
+            val imageView = view.findViewById<ImageView>(R.id.idIVCourse)
+            Glide.with(imageView)
+                    .load(adapter.getSpots()[manager.topPosition].url)
+                    .into(imageView)
         }
     }
 
